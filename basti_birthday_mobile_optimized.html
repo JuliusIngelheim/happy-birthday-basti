@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Alles Gute zum 28. Basti!</title>
+  <meta name="description" content="Moderne Happy Birthday Seite für Basti zum 28. Geburtstag" />
+  <style>
+    :root {
+      --bg-1: #0f1020;
+      --bg-2: #1c1f4a;
+      --accent-1: #ff4d8d;
+      --accent-2: #7c5cff;
+      --accent-3: #ffd166;
+      --text: #f7f8ff;
+      --muted: rgba(247,248,255,0.78);
+      --border: rgba(255,255,255,0.16);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --max-width: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 77, 141, 0.20), transparent 24%),
+        radial-gradient(circle at 85% 15%, rgba(124, 92, 255, 0.22), transparent 22%),
+        radial-gradient(circle at 50% 80%, rgba(255, 209, 102, 0.16), transparent 24%),
+        linear-gradient(135deg, var(--bg-1) 0%, #141735 35%, var(--bg-2) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 42vmax;
+      height: 42vmax;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatGlow 12s ease-in-out infinite;
+    }
+
+    body::before {
+      top: -10vmax;
+      left: -12vmax;
+      background: #ff4d8d;
+    }
+
+    body::after {
+      bottom: -14vmax;
+      right: -10vmax;
+      background: #7c5cff;
+      animation-delay: -6s;
+    }
+
+    .confetti,
+    .floating-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .confetti span {
+      position: absolute;
+      top: -12vh;
+      width: 10px;
+      height: 22px;
+      border-radius: 999px;
+      opacity: 0.9;
+      animation: confettiFall linear infinite;
+      will-change: transform;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      font-size: 16px;
+      opacity: 0.5;
+      animation: rise linear infinite;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.18));
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+      padding: max(16px, env(safe-area-inset-top)) 0 calc(56px + env(safe-area-inset-bottom));
+    }
+
+    .hero,
+    .message-card,
+    .gallery-shell {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.08));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      padding: 26px;
+      margin-bottom: 24px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(255,255,255,0.08), transparent 30%, rgba(255,255,255,0.03));
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--muted);
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+      max-width: 100%;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      line-height: 0.98;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
+      text-wrap: balance;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #ffd166 30%, #ff82b2 60%, #b7a6ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 2.2vw, 1.24rem);
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0 0 24px;
+    }
+
+    .highlight-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .gif-wrap {
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      min-height: 100%;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(255, 209, 102, 0.25), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gif-wrap::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      bottom: -40px;
+      right: -30px;
+      background: radial-gradient(circle, rgba(255, 77, 141, 0.28), transparent 65%);
+      filter: blur(8px);
+    }
+
+    .capybara {
+      width: min(100%, 360px);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.35));
+      animation: bob 3.4s ease-in-out infinite;
+      user-select: none;
+      -webkit-user-drag: none;
+      border-radius: 18px;
+    }
+
+    .section { margin-top: 24px; }
+    .section-inner { padding: 24px; }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 0 0 8px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 72ch;
+    }
+
+    .message-text {
+      margin-top: 20px;
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: #f8f7ff;
+    }
+
+    .message-signature {
+      display: inline-flex;
+      margin-top: 18px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .gallery-grid {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      min-height: 240px;
+      transform: translateY(0);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.18);
+      isolation: isolate;
+      margin: 0;
+    }
+
+    .gallery-item:nth-child(5n + 1) { grid-column: span 2; }
+    .gallery-item:nth-child(7n + 3) { grid-row: span 2; min-height: 494px; }
+
+    .gallery-item:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 22px 45px rgba(0,0,0,0.28);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease, filter 0.45s ease;
+      filter: saturate(1.03) contrast(1.02);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.08) contrast(1.05);
+    }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.26) 100%);
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .gallery-hint {
+      display: none;
+      margin-top: 14px;
+      color: rgba(247,248,255,0.72);
+      font-size: 0.95rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: rgba(247,248,255,0.7);
+      font-size: 0.96rem;
+      margin-top: 22px;
+      padding-bottom: 10px;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+      100% { transform: translate3d(var(--drift), 110vh, 0) rotate(720deg); }
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(2vmax, 2vmax, 0) scale(1.05); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(0.9) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.55; }
+      100% { transform: translateY(-120vh) scale(1.25) rotate(30deg); opacity: 0; }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      .gallery-item:nth-child(5n + 1),
+      .gallery-item:nth-child(7n + 3) {
+        grid-column: span 1;
+        grid-row: span 1;
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body::before,
+      body::after {
+        width: 52vmax;
+        height: 52vmax;
+        filter: blur(56px);
+        opacity: 0.14;
+      }
+
+      .page {
+        width: min(100% - 16px, var(--max-width));
+        padding-top: max(10px, env(safe-area-inset-top));
+      }
+
+      .hero,
+      .section-inner {
+        padding: 18px;
+      }
+
+      .hero {
+        border-radius: 24px;
+      }
+
+      .hero-grid {
+        gap: 18px;
+      }
+
+      .eyebrow,
+      .pill,
+      .message-signature {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: clamp(2.2rem, 10vw, 3.6rem);
+        line-height: 1.02;
+      }
+
+      .lead {
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .section-title {
+        font-size: 1.45rem;
+      }
+
+      .message-text {
+        font-size: 1rem;
+        line-height: 1.78;
+      }
+
+      .gif-wrap {
+        padding: 14px;
+        min-height: unset;
+      }
+
+      .capybara {
+        width: min(100%, 240px);
+      }
+
+      .highlight-row {
+        gap: 10px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 84%;
+        grid-template-columns: none;
+        gap: 12px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 8px;
+        scrollbar-width: thin;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .gallery-grid::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .gallery-grid::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.22);
+        border-radius: 999px;
+      }
+
+      .gallery-item,
+      .gallery-item:nth-child(5n + 1),
+      .gallery-item:nth-child(7n + 3) {
+        grid-column: auto;
+        grid-row: auto;
+        min-height: 320px;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        transform: none;
+      }
+
+      .gallery-item:hover {
+        transform: none;
+      }
+
+      .gallery-hint {
+        display: block;
+      }
+
+      .confetti span:nth-child(n + 26),
+      .heart:nth-child(n + 13) {
+        display: none;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .page {
+        width: min(100% - 12px, var(--max-width));
+      }
+
+      .hero,
+      .section-inner {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 11vw, 3.2rem);
+      }
+
+      .gallery-grid {
+        grid-auto-columns: 88%;
+      }
+
+      .gallery-item,
+      .gallery-item:nth-child(5n + 1),
+      .gallery-item:nth-child(7n + 3) {
+        min-height: 280px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti" aria-hidden="true"></div>
+  <div class="floating-hearts" aria-hidden="true"></div>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">🎉 Happy Birthday Special • 28 Jahre • Für Basti</div>
+          <h1><span class="gradient-text">Alles Gute zum 28. Basti!</span></h1>
+          <p class="lead">
+            Heute feiern wir dich, deine Energie, deinen Humor und all die schönen Momente, die man mit dir verbindet.
+            Julius und Magdalena wünschen dir von Herzen alles erdenklich Gute zum Geburtstag, ganz viel Glück, Gesundheit, Erfolg und ein fantastisches neues Lebensjahr.
+          </p>
+          <div class="highlight-row">
+            <div class="pill">🥳 28 Jahre Basti</div>
+            <div class="pill">💛 Von Julius &amp; Magdalena</div>
+            <div class="pill">✨ Ein Tag zum Feiern</div>
+          </div>
+        </div>
+
+        <div class="gif-wrap">
+          <img
+            class="capybara"
+            src="https://ik.imagekit.io/iu4cuvwazh/capybara-happy-birthday.gif"
+            alt="Tanzendes Capybara Happy Birthday Gif"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="section message-card">
+      <div class="section-inner">
+        <h2 class="section-title">Geburtstagsgruß</h2>
+        <p class="section-copy">
+          Manchmal sagen Bilder mehr als tausend Worte, aber heute dürfen beides glänzen: Erinnerungen und eine richtig schöne Geburtstagsnachricht.
+        </p>
+        <div class="message-text">
+          Lieber Basti,<br /><br />
+          zu deinem 28. Geburtstag wünschen wir dir nur das Beste: unvergessliche Momente, ehrliche Freude, viele Gründe zum Lachen und Menschen an deiner Seite, die dein Leben noch schöner machen.<br /><br />
+          Bleib genauso herzlich, stark und besonders, wie du bist. Wir hoffen, dass dein neues Lebensjahr voller schöner Überraschungen, spannender Abenteuer und ganz vieler Glücksmomente steckt.<br /><br />
+          Lass dich heute ordentlich feiern und genieße deinen Tag in vollen Zügen. Du hast es verdient.
+        </div>
+        <div class="message-signature">Alles Liebe von Julius &amp; Magdalena</div>
+      </div>
+    </section>
+
+    <section class="section gallery-shell">
+      <div class="section-inner">
+        <h2 class="section-title">Lieblingsmomente</h2>
+    
+
+        <div class="gallery-grid">
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(12).jpg" alt="Erinnerungsfoto 1 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(19).jpg" alt="Erinnerungsfoto 2 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(20).jpg" alt="Erinnerungsfoto 3 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(16).jpg" alt="Erinnerungsfoto 4 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(15).jpg" alt="Erinnerungsfoto 5 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(13).jpg" alt="Erinnerungsfoto 6 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(5).jpg" alt="Erinnerungsfoto 7 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(17).jpg" alt="Erinnerungsfoto 8 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(21).jpg" alt="Erinnerungsfoto 9 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(8).jpg" alt="Erinnerungsfoto 10 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(22).jpg" alt="Erinnerungsfoto 11 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(11).jpg" alt="Erinnerungsfoto 12 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(10).jpg" alt="Erinnerungsfoto 13 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(14).jpg" alt="Erinnerungsfoto 14 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(6).jpg" alt="Erinnerungsfoto 15 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(9).jpg" alt="Erinnerungsfoto 16 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(18).jpg" alt="Erinnerungsfoto 17 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(7).jpg" alt="Erinnerungsfoto 18 mit Basti" loading="lazy" /></figure>
+          <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(4).jpg" alt="Erinnerungsfoto 19 mit Basti" loading="lazy" /></figure>
+        </div>
+
+        <p class="gallery-hint">👉 Auf dem Handy einfach seitlich durch die Bilder wischen.</p>
+      </div>
+    </section>
+
+    <p class="footer-note">Happy Birthday, Basti — heute gehört die Bühne dir. 🎂</p>
+  </main>
+
+  <script>
+    const confettiContainer = document.querySelector('.confetti');
+    const confettiColors = ['#ff4d8d', '#7c5cff', '#ffd166', '#6ee7ff', '#ffffff'];
+
+    for (let i = 0; i < 48; i++) {
+      const piece = document.createElement('span');
+      piece.style.left = `${Math.random() * 100}%`;
+      piece.style.background = confettiColors[i % confettiColors.length];
+      piece.style.animationDuration = `${7 + Math.random() * 7}s`;
+      piece.style.animationDelay = `${Math.random() * -10}s`;
+      piece.style.setProperty('--drift', `${-120 + Math.random() * 240}px`);
+      piece.style.opacity = (0.45 + Math.random() * 0.55).toFixed(2);
+      piece.style.width = `${8 + Math.random() * 8}px`;
+      piece.style.height = `${16 + Math.random() * 16}px`;
+      piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confettiContainer.appendChild(piece);
+    }
+
+    const heartsContainer = document.querySelector('.floating-hearts');
+    const hearts = ['💖', '✨', '🎉', '💛'];
+
+    for (let i = 0; i < 22; i++) {
+      const heart = document.createElement('span');
+      heart.className = 'heart';
+      heart.textContent = hearts[i % hearts.length];
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${9 + Math.random() * 9}s`;
+      heart.style.animationDelay = `${Math.random() * -16}s`;
+      heart.style.fontSize = `${14 + Math.random() * 14}px`;
+      heartsContainer.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
