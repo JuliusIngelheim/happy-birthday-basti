@@ -9,15 +9,11 @@
     :root {
       --bg-1: #0f1020;
       --bg-2: #1c1f4a;
-      --accent-1: #ff4d8d;
-      --accent-2: #7c5cff;
-      --accent-3: #ffd166;
       --text: #f7f8ff;
       --muted: rgba(247,248,255,0.78);
       --border: rgba(255,255,255,0.16);
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
       --radius-xl: 28px;
-      --radius-lg: 22px;
       --radius-md: 18px;
       --max-width: 1240px;
     }
@@ -270,6 +266,7 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
+      align-items: stretch;
     }
 
     .gallery-item {
@@ -302,6 +299,8 @@
       display: block;
       transition: transform 0.7s ease, filter 0.45s ease;
       filter: saturate(1.03) contrast(1.02);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     .gallery-item:hover img {
@@ -318,8 +317,7 @@
       pointer-events: none;
     }
 
-    .gallery-hint {
-      display: none;
+    .gallery-note {
       margin-top: 14px;
       color: rgba(247,248,255,0.72);
       font-size: 0.95rem;
@@ -385,13 +383,8 @@
         padding: 18px;
       }
 
-      .hero {
-        border-radius: 24px;
-      }
-
-      .hero-grid {
-        gap: 18px;
-      }
+      .hero { border-radius: 24px; }
+      .hero-grid { gap: 18px; }
 
       .eyebrow,
       .pill,
@@ -411,9 +404,7 @@
         line-height: 1.65;
       }
 
-      .section-title {
-        font-size: 1.45rem;
-      }
+      .section-title { font-size: 1.45rem; }
 
       .message-text {
         font-size: 1rem;
@@ -425,35 +416,12 @@
         min-height: unset;
       }
 
-      .capybara {
-        width: min(100%, 240px);
-      }
-
-      .highlight-row {
-        gap: 10px;
-      }
+      .capybara { width: min(100%, 240px); }
+      .highlight-row { gap: 10px; }
 
       .gallery-grid {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 84%;
-        grid-template-columns: none;
+        grid-template-columns: 1fr;
         gap: 12px;
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        scroll-snap-type: x mandatory;
-        padding-bottom: 8px;
-        scrollbar-width: thin;
-        -webkit-overflow-scrolling: touch;
-      }
-
-      .gallery-grid::-webkit-scrollbar {
-        height: 8px;
-      }
-
-      .gallery-grid::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.22);
-        border-radius: 999px;
       }
 
       .gallery-item,
@@ -461,48 +429,41 @@
       .gallery-item:nth-child(7n + 3) {
         grid-column: auto;
         grid-row: auto;
-        min-height: 320px;
-        scroll-snap-align: center;
-        scroll-snap-stop: always;
+        min-height: auto;
+        aspect-ratio: 4 / 5;
         transform: none;
       }
 
-      .gallery-item:hover {
+      .gallery-item:hover,
+      .gallery-item:hover img {
         transform: none;
+        filter: saturate(1.03) contrast(1.02);
       }
 
-      .gallery-hint {
-        display: block;
+      .gallery-item::after {
+        background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.16) 100%);
       }
 
-      .confetti span:nth-child(n + 26),
-      .heart:nth-child(n + 13) {
+      .confetti span:nth-child(n + 22),
+      .heart:nth-child(n + 10) {
         display: none;
       }
     }
 
     @media (max-width: 420px) {
-      .page {
-        width: min(100% - 12px, var(--max-width));
-      }
+      .page { width: min(100% - 12px, var(--max-width)); }
 
       .hero,
       .section-inner {
         padding: 16px;
       }
 
-      h1 {
-        font-size: clamp(2rem, 11vw, 3.2rem);
-      }
-
-      .gallery-grid {
-        grid-auto-columns: 88%;
-      }
+      h1 { font-size: clamp(2rem, 11vw, 3.2rem); }
 
       .gallery-item,
       .gallery-item:nth-child(5n + 1),
       .gallery-item:nth-child(7n + 3) {
-        min-height: 280px;
+        aspect-ratio: 1 / 1.2;
       }
     }
 
@@ -566,7 +527,9 @@
     <section class="section gallery-shell">
       <div class="section-inner">
         <h2 class="section-title">Lieblingsmomente</h2>
-    
+        <p class="section-copy">
+          Auf dem Handy ist die Galerie jetzt bewusst einfacher aufgebaut: kein horizontales Wischen, kein Scroll-Snap und kein Mobile-Masonry mehr, sondern eine saubere, stabile Einspalten-Galerie mit festen Bildverhältnissen.
+        </p>
 
         <div class="gallery-grid">
           <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(12).jpg" alt="Erinnerungsfoto 1 mit Basti" loading="lazy" /></figure>
@@ -590,7 +553,7 @@
           <figure class="gallery-item"><img src="https://ik.imagekit.io/iu4cuvwazh/shared%20image%20(4).jpg" alt="Erinnerungsfoto 19 mit Basti" loading="lazy" /></figure>
         </div>
 
-        <p class="gallery-hint">👉 Auf dem Handy einfach seitlich durch die Bilder wischen.</p>
+        <p class="gallery-note">Auf Mobile steht hier jetzt Stabilität vor Spezialeffekten, damit nichts springt oder hakelt.</p>
       </div>
     </section>
 
@@ -601,7 +564,7 @@
     const confettiContainer = document.querySelector('.confetti');
     const confettiColors = ['#ff4d8d', '#7c5cff', '#ffd166', '#6ee7ff', '#ffffff'];
 
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < 40; i++) {
       const piece = document.createElement('span');
       piece.style.left = `${Math.random() * 100}%`;
       piece.style.background = confettiColors[i % confettiColors.length];
@@ -618,7 +581,7 @@
     const heartsContainer = document.querySelector('.floating-hearts');
     const hearts = ['💖', '✨', '🎉', '💛'];
 
-    for (let i = 0; i < 22; i++) {
+    for (let i = 0; i < 18; i++) {
       const heart = document.createElement('span');
       heart.className = 'heart';
       heart.textContent = hearts[i % hearts.length];
